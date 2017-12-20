@@ -3,7 +3,32 @@ package main
 
 import (
 	"net/http"
+	"github.com/brycelol/learning-golang/chitchat/app/data"
 )
+
+// This will be our index handler
+// Default entry point for the web app
+func index(w http.ResponseWriter, r *http.Request) {
+
+	// Getting a list of the current threads on the chat app
+	threads, err := data.Threads()
+
+	if err == nil {
+
+		// Authenticate the session using out utility function
+		// an error returned here tells us that the session is invalid
+		// session returns a Session struct but we aren't interested in that
+		// right now so we assign it to _
+		_, err := session(w, r)
+
+		if err != nil {
+			generateHTML(w, threads, "layout", "public.navbar", "index")
+		} else {
+			generateHTML(w, threads, "lauout", "private.navbar", "index")
+		}
+	}
+
+}
 
 func main() {
 

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/brycelol/learning-golang/chitchat/app/data"
 	"net/http"
 )
 
@@ -17,13 +18,12 @@ func authenticate(w http.ResponseWriter, r *http.Request) {
 	// Grab the user password, then check if the posted password is matching
 	// after encryption of it
 	if user.Password == data.Encrypt(r.PostFormValue("password")) {
-
 		// If so, we create a session for the user
 		session := user.CreateSession()
 
 		// Then a corresponding cookie
 		cookie := http.Cookie{
-			Name:  "_cookie",
+			Name:  "chitchat-session-id",
 			Value: session.Uuid,
 			// HttpOnly means only http requests can access the cookie (not JS etc)
 			HttpOnly: true,
