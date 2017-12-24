@@ -24,7 +24,7 @@ function log()
   echo "$(date) [INFO]-[init-postgres] $1"
 }
 
-function logAndExit()
+function log_and_exit()
 {
   echo "$(date) [ERROR]-[init-postgres] $1"
   if [ ! -z $2 ] ; then exit $2 ; else exit 1; fi
@@ -40,10 +40,10 @@ function pull_docker_image()
   log "Pulling Docker image [$1]."
 
   if ! is_active "docker" ; then
-    logAndExit "Docker not currently running." 2
+    log_and_exit "Docker not currently running." 2
   fi
 
-  docker pull "$1" || logAndExit "An error occurred while pulling docker image."
+  docker pull "$1" || log_and_exit "An error occurred while pulling docker image."
 }
 
 function run_container()
@@ -51,16 +51,16 @@ function run_container()
   log "Starting container..."
 
   if ! is_active "docker" ; then
-    logAndExit "Docker not currently running." 2
+    log_and_exit "Docker not currently running." 2
   fi
 
-  docker run "$@" || logAndExit "An error occurred while starting container."
+  docker run "$@" || log_and_exit "An error occurred while starting container."
 }
 
 function has_container()
 {
   if ! is_active "docker" ; then
-    logAndExit "Docker not currently running." 2
+    log_and_exit "Docker not currently running." 2
   fi
 
   docker ps -a -f name=="$1" >> /dev/null 2>&1 && return $?
@@ -71,11 +71,11 @@ function container_running()
   log "Checking if container [$1] is running."
 
   if ! is_active "docker" ; then
-    logAndExit "Docker not currently running." 2
+    log_and_exit "Docker not currently running." 2
   fi
 
   if ! hasContainer "$1" ; then
-    logAndExit "Container $1 does not exist." 3
+    log_and_exit "Container $1 does not exist." 3
   fi
 
   if [[ $(docker inspect "$1" | jq '.[].State.Status') == "\"running\"" ]] ; then
@@ -86,7 +86,7 @@ function container_running()
 }
 
 if ! is_active "docker" ; then
-  logAndExit "Docker not currently running." 2
+  log_and_exit "Docker not currently running." 2
 fi
 
 log "Initializing $PSQL_SERVICE_NAME_CONTAINER..."
