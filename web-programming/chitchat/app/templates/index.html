@@ -12,6 +12,7 @@ referenced below are values defined within that struct -->
         <span class="lead"> <i class="fa fa-comment-o"></i> {{ .Topic }}</span>
     </div>
     <div class="panel-body">
+        <!-- Note .NumReplies here - it's actually a method call on the Thread struct -->
         Started by {{ .User.Name }} - {{ .CreatedAtDate }} - {{ .NumReplies }} posts.
         <div class="pull-right">
             <a href="/thread/read?id={{.Uuid }}">Read more</a>

@@ -3,9 +3,10 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/brycelol/learning-golang/chitchat/data"
 	"html/template"
 	"net/http"
+
+	"github.com/brycelol/learning-golang/web-programming/chitchat/app/data"
 )
 
 // generateHTML can be used to generate templates based upon supplied

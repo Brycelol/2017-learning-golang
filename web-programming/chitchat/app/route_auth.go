@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/brycelol/learning-golang/chitchat/app/data"
 	"net/http"
+	"github.com/brycelol/learning-golang/web-programming/chitchat/app/data"
 )
 
 // Authenticates a user and returns a cookie in the response header which

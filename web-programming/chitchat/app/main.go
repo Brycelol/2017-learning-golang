@@ -3,7 +3,7 @@ package main
 
 import (
 	"net/http"
-	"github.com/brycelol/learning-golang/chitchat/app/data"
+	"github.com/brycelol/learning-golang/web-programming/chitchat/app/data"
 )
 
 // This will be our index handler
@@ -24,7 +24,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			generateHTML(w, threads, "layout", "public.navbar", "index")
 		} else {
-			generateHTML(w, threads, "lauout", "private.navbar", "index")
+			generateHTML(w, threads, "layout", "private.navbar", "index")
 		}
 	}
 
@@ -51,7 +51,7 @@ func main() {
 	// Adding a handler to the multiplexer
 	// first parameter is the route, second is the handler
 	// handler will always take a http response / request
-	//mux.HandleFunc("/", index)
+	mux.HandleFunc("/", index)
 
 	server := &http.Server{
 		Addr:    "0.0.0.0:8080",
