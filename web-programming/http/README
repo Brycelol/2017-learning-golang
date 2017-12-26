@@ -1,0 +1,5 @@
+This folder is intended to house go coding exercises relating to the net/http package in Go.
+
+The net/http library can be divided into two parts:
+1. Client: Client, Response, Header, Request, Cookie
+2. Server: Server, ServerMux, Handler/HandlerFunc, ResponseWriter, Header, Request, Cookie
