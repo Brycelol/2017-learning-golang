@@ -31,6 +31,8 @@ func main() {
 	// which is a multiplexer. This is because ServeMux (which DefaultServeMux is an instance of)
 	// has a ServeHTTP with the same signature - hence it is also an instance of the handler struct.
 	// It's a special handler though, as its job is to redirect to different handlers depending on the URL.
+	//
+	// We wouldn't normally do this though - unless it's a specific server handling a very specific task.
 	server := http.Server{
 		Addr:    "127.0.0.1:8080",
 		Handler: &helloWorldHandler,
